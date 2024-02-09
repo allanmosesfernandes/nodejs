@@ -19,8 +19,8 @@ fs.writeFileSync(file, data)
 ```
 Test Code@
 ```
-fs.writeFileSync('hello.text', 'This file was created by Node.js!')
 
+fs.writeFileSync('hello.text', 'This file was created by Node.js!')
 
 ReferenceError: fs is not defined
 ```
@@ -37,3 +37,21 @@ fs.writeFileSync('hello.text', 'This file was created by Node.js!')
 **The require function returns all of the stuff in the fs module so we're going to call a constant called fs**
 
 If the file doesn't exisit it will be created and if it does exist it will be overwritten.
+
+#### fs.appendFileSync
+
+```
+fs.appendFileSync('hello.text', '\nThis text will be appended on a new line!');
+```
+
+#### Load in another file you've created.
+
+```
+const getNotes = function getNotes() {
+  return 'Your notes...'
+}
+
+module.exports = getNotes
+```
+
+#### Loading in npm modules.
