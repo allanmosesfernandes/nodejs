@@ -1,0 +1,1 @@
+FileSystem.writeFileSync('hello.text', 'This file was created by Node.js!')
