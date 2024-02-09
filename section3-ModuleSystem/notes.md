@@ -55,3 +55,27 @@ module.exports = getNotes
 ```
 
 #### Loading in npm modules.
+
+- Don't forget to first initialize npm using ```npm init -y```
+- ```npm install package-name```
+- You can import using Common JS or ES6
+- If using ES6, you need to change the packagee json file and mention the type="module"
+
+```
+{
+  "name": "section3-modulesystem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+}
+```
+#### Using Nodemon.
+- All this while we were running our app.js using node app.js
+- After making any change we still had to manually run node app.js
+- Nodemon changes this, it's an npm package we install globally 
+
+``` npm install nodemon -g```
+
+- No we no longer have to re-run our script, we can just run nodemon app.js and it keeps listening for file changes and auto-runs our script.
+```nodemon app.js``
