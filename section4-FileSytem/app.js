@@ -3,22 +3,9 @@ const chalk = require('chalk');
 const yargs = require('yargs');
 const log = console.log;
 const fs = require('fs');
-// const message = 'Allan moses Fernandes 1997';
-// console.log(process.argv);
+const notes = require('./notes.js');
 
-// const input = process.argv[2];
-
-// input === 'add' ? log(chalk.green('Adding note!')) : log(chalk.red('Please enter a valid command'));
-
-
-// console.log(chalk.blue(process.argv));
-
-
-//Create add command 
-
-// console.log(chalk.blue(process.argv));
-// console.log(chalk.green(JSON.stringify(yargs.argv)));
-
+//=== Add Note ===//
 yargs.command({
     command: 'add',
     describe: 'Add a new note',
@@ -34,34 +21,59 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function (argv) {
-        fs.appendFileSync('./notes.txt', 'Title: ' + argv.title + ' Body: ' + argv.body + '\n');
-        const fileContent = fs.readFileSync('./notes.txt', 'utf8');
-        console.log(fileContent);
+    handler (argv) {
+        notes.addNote(argv.title, argv.body);
     }
 })
 
+//=== Remove Note ===//
 yargs.command({
-    command: 'sub',
-    describe: 'Removing a note',
-    handler: function () {
-        console.log('Removing new note') 
+    command: 'delete',
+    describe: 'Deleting a note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler(argv) {
+      notes.removeNote(argv.title);
     }
 })
 
+//=== List Note ===//
 yargs.command({
     command: 'list',
     describe: 'Listing all notes',
-    handler: function () {
+    handler () {
         console.log('Listing all notes.') 
     }
 })
 
+//=== Read Note ===//
 yargs.command({
     command: 'read',
-    describe: 'Reading a notes',
-    handler: function () {
-        console.log('Reading a notes.') 
+    describe: 'Reading a note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler(argv) {
+        notes.readNote(argv.title);
+    }
+})
+
+//=== Clear Note ===//
+yargs.command({
+    command: 'clear',
+    describe: 'Clearing all notes',
+    handler () {
+        notes.clearNotes();
+        log(chalk.blue('Clearing all notes.')); 
     }
 })
 
