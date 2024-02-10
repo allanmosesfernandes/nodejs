@@ -2,7 +2,7 @@
 const chalk = require('chalk');
 const yargs = require('yargs');
 const log = console.log;
-
+const fs = require('fs');
 // const message = 'Allan moses Fernandes 1997';
 // console.log(process.argv);
 
@@ -18,6 +18,7 @@ const log = console.log;
 
 // console.log(chalk.blue(process.argv));
 // console.log(chalk.green(JSON.stringify(yargs.argv)));
+
 yargs.command({
     command: 'add',
     describe: 'Add a new note',
@@ -34,8 +35,9 @@ yargs.command({
         }
     },
     handler: function (argv) {
-        console.log("Adding note title", argv.title); 
-        console.log("Body", argv.body); 
+        fs.appendFileSync('./notes.txt', 'Title: ' + argv.title + ' Body: ' + argv.body + '\n');
+        const fileContent = fs.readFileSync('./notes.txt', 'utf8');
+        console.log(fileContent);
     }
 })
 

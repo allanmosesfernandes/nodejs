@@ -36,9 +36,9 @@ yargs.command({
 yargs.parse();
 
 ```
-The code snippet above uses yargs.command to set up a command for the Yargs parser to recognize when add is passed as an argument. However, simply defining the command isn't enough to make it execute automatically when you run your script with node app.js add.
+The code snippet above uses **yargs.command** to set up a command for the Yargs parser to recognize when add is passed as an argument. However, simply defining the command isn't enough to make it execute automatically when you run your script with node app.js add.
 
-To execute the command handler associated with the add command, you need to call yargs.parse() after setting up your commands. This will instruct Yargs to parse the command line arguments and execute the appropriate command handler based on the provided arguments.
+To execute the command handler associated with the add command, you need to call   after setting up your commands. This will instruct Yargs to parse the command line arguments and execute the appropriate command handler based on the provided arguments.
 
 ##### Supporting options for your commands
 For eg: The add command requires the title and the body of the note you're adding, the remove command needs the title of the note you're trying to remove
@@ -70,3 +70,36 @@ Adding note { _: [ 'add' ], title: 'HBF', '$0': 'app.js' }
 -Basically now you can work with the argv.title 
 ```demandOption```: Default false, whether its compulsory
 ```type```: What is the type of argument, default boolean 
+
+##### Storing data using JSON
+**Javascript Object**
+```
+const book = {
+    title: 'Ego is the enemy',
+    author: 'Ryan Holiday'
+};
+
+const bookJSON = JSON.stringify(book);
+
+```
+This is a JavaScript object. It's a collection of key-value pairs enclosed in curly braces {}. The keys are unquoted and the values can be of various types including strings, numbers, arrays, and even other objects
+
+**JSON Object**
+```
+{
+    "title": "Ego is the enemy",
+    "author": "Ryan Holiday"
+}
+
+```
+This is a JSON object. It's a string representation of data in a format that follows the JSON syntax rules. In JSON, keys must be quoted with double quotes ", and only simple data types like strings, numbers, booleans, arrays, and objects are allowed. Functions and undefined values are not allowed in JSON.
+
+When you use ```JSON.stringify()``` on a JavaScript object, it converts the object into a JSON string. So ```bookJSON``` in your example is a JSON string, not a JSON object. It's a string that represents the JSON object book. Once serialized into a string, it can be transmitted over the network or stored in a file, for example, and later parsed back into a JavaScript object using ```JSON.parse()```.
+
+**fs.readFileSync**
+```
+fs.readFileSync('1-json.json','')
+```
+
+Used to read files and takes in a single argument, which is the file name.
+
