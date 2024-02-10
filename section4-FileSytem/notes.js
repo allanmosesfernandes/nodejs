@@ -8,6 +8,7 @@ const getNotes = function () {
     return "Your notes..."
 }
 
+//=== Add Note ===//
 const addNote = function (title, body) {
     if (title === '') {
         log(chalk.red('Title cannot be empty'));
@@ -33,6 +34,7 @@ const addNote = function (title, body) {
     saveNotes(notes);
 }
 
+//=== Remove Note ===//
 const removeNote = function (title) {
     loadNotes();
     if (title === '') {
@@ -54,6 +56,7 @@ const removeNote = function (title) {
     }
 }
 
+//=== Read Note ===//
 const readNote = function (title) {
     if (title === '') {
         log(chalk.red('Title cannot be empty'));
@@ -66,7 +69,9 @@ const readNote = function (title) {
     });
     RetrieveNote === undefined ? log(chalk.red('Note not found')) : console.log('Note: ', RetrieveNote);
 }
+
 //== UTILITIES ==//
+//=== Load Notes ===//
 const loadNotes = () => {
     console.log('loading notes');
     try {
@@ -81,13 +86,22 @@ const loadNotes = () => {
     }
 }
 
+//=== Save Note ===//
 const saveNotes = (notes) => {
     const notesString = JSON.stringify(notes);
     fs.writeFileSync('./notes.json', notesString);
 }   
-
+//=== Clear Note ===//
 const clearNotes = () => {
     fs.writeFileSync('./notes.json', JSON.stringify([]));
+}
+
+const listNotes = () => {
+    const notes = loadNotes();
+    console.log('Your notes');
+    notes.forEach((note) => {
+        console.log(note);
+    });
 }
 
 module.exports = {
@@ -96,7 +110,8 @@ module.exports = {
     loadNotes: loadNotes,
     clearNotes: clearNotes,
     removeNote: removeNote,
-    readNote: readNote
+    readNote: readNote,
+    listNotes: listNotes
 }
 
 
