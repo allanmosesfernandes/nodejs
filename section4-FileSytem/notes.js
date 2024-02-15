@@ -19,7 +19,7 @@ const addNote = function (title, body) {
     const duplicateNotes = notes.filter((note) => {
         return note.title.toLowerCase() === title.toLowerCase();
     });
-
+    debugger;
     if (duplicateNotes.length > 0) {
         log(chalk.red('Note title already exists'));
         return;
